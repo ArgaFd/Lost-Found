@@ -30,19 +30,23 @@ Tujuan dari pengembangan aplikasi "Lost & Found" ini adalah:
 Berikut adalah visualisasi interaksi aktor dengan sistem menggunakan Mermaid Diagram:
 
 ```mermaid
-usecaseDiagram
-    actor "User (Guest)" as G
-    actor "User (Member)" as M
-    
-    package "Lost & Found System" {
-        usecase "Register" as U1
-        usecase "Login" as U2
-        usecase "View & Filter Items" as U3
-        usecase "Post Item" as U4
-        usecase "Manage Own Post" as U5
-        usecase "Contact via WhatsApp" as U6
-    }
+graph LR
+    %% Actors represented as Nodes
+    G[👤 User - Guest]
+    M[👤 User - Member]
 
+    %% System Boundary
+    subgraph System [Lost & Found System]
+        direction TB
+        U1((Register))
+        U2((Login))
+        U3((View & Filter Items))
+        U4((Post Item))
+        U5((Manage Own Post))
+        U6((Contact via WhatsApp))
+    end
+
+    %% Relationships
     G --> U1
     G --> U2
     
@@ -51,7 +55,7 @@ usecaseDiagram
     M --> U5
     M --> U6
     
-    U1 -.-> U2 : <<include>>
+    U1 -.-> U2
 ```
 
 ## 2.2 Tabel Deskripsi Use Case (Detail)
