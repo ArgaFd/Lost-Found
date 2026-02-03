@@ -135,6 +135,29 @@ erDiagram
     }
 ```
 
+### Penjelasan Entitas dan Relasi:
+
+Basis data disusun dengan struktur yang efisien untuk mendukung operasi CRUD. Berikut adalah rincian komponen diagram di atas:
+
+#### 1. Entitas "Users" (Pengguna)
+Menyimpan informasi akun pengguna untuk keperluan otentikasi.
+*   **id (PK)**: Kunci utama yang unik untuk setiap pengguna. Digunakan sebagai referensi saat memposting barang.
+*   **name**: Nama lengkap yang akan ditampilkan di profil atau sapaan.
+*   **email**: Digunakan sebagai identitas unik saat login.
+*   **password**: Kunci keamanan (disarankan terenkripsi/hash di lingkungan produksi).
+
+#### 2. Entitas "Items" (Barang)
+Menyimpan seluruh data laporan kehilangan dan penemuan.
+*   **id (PK)**: Identitas unik untuk setiap laporan barang.
+*   **userId (FK)**: Kunci tamu (Foreign Key) yang menghubungkan barang dengan pemilik postingan (Tabel Users).
+*   **category**: Menandai jenis laporan, apakah barang tersebut "Lost" (Hilang) atau "Found" (Ditemukan).
+*   **status**: Menandai apakah kasus ini masih aktif ("Active") atau sudah selesai ("Solved").
+
+#### 3. Kardinalitas Relasi (1:N)
+Hubungan antara **Users** dan **Items** adalah **One-to-Many** (1 ke Banyak).
+*   **Penjelasan**: Satu akun User (`1`) dapat membuat atau memposting BANYAK laporan Item (`N`).
+*   **Implikasi**: Sebaliknya, satu laporan Item hanya bisa dimiliki oleh satu akun User saja. Ini penting agar fitur "Hapus Postingan" bekerja dengan benar (hanya pemilik asli yang bisa menghapus).
+
 ---
 
 # BAB 3: ARSITEKTUR PERANGKAT LUNAK
